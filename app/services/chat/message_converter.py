@@ -126,9 +126,8 @@ class OpenAIMessageConverter(MessageConverter):
                         role = "model"
 
             parts = []
-            # 特别处理最后一个assistant的消息，按\n\n分割
-            if role == "assistant" and idx == len(messages) - 2 and isinstance(msg["content"], str) and msg["content"]:
-                # 按\n\n分割消息
+            # 特别处理assistant的消息，按\n\n分割
+            if role == "assistant" and isinstance(msg["content"], str) and msg["content"]:
                 content_parts = msg["content"].split("\n\n")
                 for part in content_parts:
                     if not part.strip():  # 跳过空内容
